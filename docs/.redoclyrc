@@ -1,0 +1,9 @@
+
+apiTitle: hryvnia-svc
+splitSpec: true
+codeSamples: false
+swaggerUI: true
+travis: true
+repo: github.com/Waramoto/hryvnia-svc
+oasVersion: 1.0.0
+

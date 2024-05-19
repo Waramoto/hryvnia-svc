@@ -1,0 +1,34 @@
+version: '3.9'
+services:
+
+  hryvnia-db:
+    container_name: hryvnia-db
+    image: postgres:15.2
+    restart: unless-stopped
+    volumes:
+      - pg-data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_USER: 'user'
+      POSTGRES_PASSWORD: 'pass'
+      POSTGRES_DB: 'postgres'
+    ports:
+      - "5432:5432"
+
+  hryvnia-svc:
+    build: .
+    container_name: hryvnia-svc
+    image: hryvnia-svc
+    restart: unless-stopped
+    environment:
+      KV_VIPER_FILE: /config.yaml
+    ports:
+      - "8000:80"
+    depends_on:
+      - hryvnia-db
+    volumes:
+      - ./config.yaml:/config.yaml
+    entrypoint: >
+      sh -c "hryvnia-svc migrate up && hryvnia-svc run service"
+
+volumes:
+  pg-data:

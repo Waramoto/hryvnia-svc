@@ -1,0 +1,15 @@
+get:
+  tags:
+    - "rate"
+  summary: "Отримати поточний курс USD до UAH"
+  description: "Запит має повертати поточний курс USD до UAH використовуючи будь-який third party сервіс з публічним АРІ"
+  operationId: "rate"
+  produces:
+    - "application/json"
+  responses:
+    "200":
+      description: "Повертається актуальний курс USD до UAH"
+      schema:
+        type: "number"
+    "400":
+      description: "Invalid status value"

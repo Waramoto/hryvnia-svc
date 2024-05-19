@@ -1,0 +1,30 @@
+log:
+  level: debug
+  disable_sentry: true
+
+db:
+  url: postgres://user:pass@hryvnia-db:5432/postgres?sslmode=disable
+
+sender:
+  period: 24h
+  email:
+    from: ""
+    password: ""
+    host: "smtp.gmail.com"
+    port: "587"
+    identity: ""
+  runner: # running.WithBackoff configs
+    normal_period: 10s
+    min_abnormal_period: 20s
+    max_abnormal_period: 30s
+
+listener:
+  addr: :80
+
+cop:
+  disabled: true
+  endpoint: "http://cop"
+  upstream: "http://hryvnia-svc"
+  service_name: hryvnia-svc
+  service_port: 80
+  service_prefix: "/api"
